@@ -1,16 +1,6 @@
-#  Gradle bootstrap project.
+#  JLBH presentation
 
-Built using the following commands.
+Run tests using the following commands.
 
-    gradle wrapper --gradle-version=4.2.1
-    ./gradlew init --type java-application --test-framework spock
-
-
-To run:
-
-    ./gradlew clean build shadowJar
-    java -jar build/libs/foo-all.jar
-    
-    # or
-    ./gradlew clean build runShadow
-
+    mvn -U clean test
+ 
