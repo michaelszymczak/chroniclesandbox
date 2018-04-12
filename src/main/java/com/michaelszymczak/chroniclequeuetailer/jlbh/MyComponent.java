@@ -7,7 +7,7 @@ import java.util.Arrays;
  */
 public class MyComponent {
 
-//  private final double[] data = new double[1000];
+  private final double[] data = new double[1000];
   private final double someInitialState;
 
   private double sum = 0.0d;
@@ -17,21 +17,21 @@ public class MyComponent {
   }
 
   public double priceOf(long input) {
-    final double data[] = new double[1000];
+//    final double data[] = new double[1000];
     for (int i = 0; i < data.length; i++) {
       data[i] = (double) input * i + someInitialState;
     }
 
-    return gaverageOf(data);
+    return averageOf(data);
   }
 
 
-//  private double averageOf(double[] input) {
-//    for (int  i = 0; i < input.length; i++) {
-//      sum += input[i];
-//    }
-//    return sum / input.length;
-//  }
+  private double averageOf(double[] input) {
+    for (int  i = 0; i < input.length; i++) {
+      sum += input[i];
+    }
+    return sum / input.length;
+  }
 
   private double gaverageOf(double[] input) {
     return Arrays.stream(input).summaryStatistics().getAverage();
