@@ -12,7 +12,10 @@ import static java.util.Objects.requireNonNull;
 public class ComponentTestingTask implements JLBHTask {
 
   private final MyComponent componentUnderTest;
+  private final ComputationEnforcer computationEnforcer = new ComputationEnforcer();
+
   private JLBH jlbh;
+
 
   public ComponentTestingTask(MyComponent componentUnderTest) {
     this.componentUnderTest = requireNonNull(componentUnderTest);
@@ -25,7 +28,15 @@ public class ComponentTestingTask implements JLBHTask {
 
   @Override
   public void run(long startTimeNS) {
-    componentUnderTest.priceOf(startTimeNS);
+    double result = componentUnderTest.priceOf(startTimeNS);
     jlbh.sampleNanos(System.nanoTime() - startTimeNS);
+    computationEnforcer.process(result);
   }
+
+  @Override
+  public void complete(){
+    System.out.println(computationEnforcer.useResult());
+  }
+
+
 }
