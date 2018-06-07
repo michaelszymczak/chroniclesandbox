@@ -1,6 +1,6 @@
 package com.michaelszymczak.jlbh;
 
-import com.michaelszymczak.chroniclequeuetailer.jlbh.MyComponent;
+import com.michaelszymczak.chroniclequeuetailer.jlbh.Valuation;
 import net.openhft.chronicle.core.jlbh.JLBH;
 import net.openhft.chronicle.core.jlbh.JLBHTask;
 
@@ -11,13 +11,13 @@ import static java.util.Objects.requireNonNull;
  */
 public class ComponentTestingTask implements JLBHTask {
 
-  private final MyComponent componentUnderTest;
+  private final Valuation componentUnderTest;
   private final ComputationEnforcer computationEnforcer = new ComputationEnforcer();
 
   private JLBH jlbh;
 
 
-  public ComponentTestingTask(MyComponent componentUnderTest) {
+  public ComponentTestingTask(Valuation componentUnderTest) {
     this.componentUnderTest = requireNonNull(componentUnderTest);
   }
 

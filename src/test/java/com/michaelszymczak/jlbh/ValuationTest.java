@@ -1,6 +1,6 @@
 package com.michaelszymczak.jlbh;
 
-import com.michaelszymczak.chroniclequeuetailer.jlbh.MyComponent;
+import com.michaelszymczak.chroniclequeuetailer.jlbh.Valuation;
 import net.openhft.chronicle.core.jlbh.JLBH;
 import net.openhft.chronicle.core.jlbh.JLBHOptions;
 import net.openhft.chronicle.core.jlbh.JLBHResult;
@@ -12,29 +12,26 @@ import java.io.PrintStream;
 import java.time.Duration;
 import java.util.Arrays;
 
-import static com.michaelszymczak.chroniclequeuetailer.jlbh.Memory.*;
+import static com.michaelszymczak.chroniclequeuetailer.jlbh.Memory.asManyBytesAs;
+import static com.michaelszymczak.chroniclequeuetailer.jlbh.Memory.usedMemoryInBytes;
 import static java.time.Duration.ofMillis;
 import static java.time.Duration.ofNanos;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.lessThan;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 /**
  * Created 07/04/18.
  */
-public class MyComponentTest {
+public class ValuationTest {
   @Test
   public void testNothing() throws Exception {
-
-
   }
-//
+
 //  @Test // UNIT TEST
 //  public void shouldBeCorrectWhenCalculatingThePrice() throws Exception {
-//    MyComponent myComponent = new MyComponent(15.5);
+//    Valuation valuation = new Valuation(15.5);
 //
-//    double result = myComponent.priceOf(1500);
+//    double result = valuation.priceOf(1500);
 //
 //    assertEquals(749265.5, result, 0.0001);
 //  }
@@ -42,9 +39,9 @@ public class MyComponentTest {
 //  @Test // NOT A UNIT TEST
 //  public void shouldAlwaysQuicklyPerformTheTask() throws Exception {
 //    // given
-//    final MyComponent myComponent = createMyComponent();
+//    final Valuation valuation = createMyComponent();
 //    final JLBHResultConsumer results = results();
-//    final JLBH jlbh = new JLBH(parametersWhenTesting(myComponent), printStream(), results);
+//    final JLBH jlbh = new JLBH(parametersWhenTesting(valuation), printStream(), results);
 //
 //    // when
 //    jlbh.start();
@@ -63,14 +60,14 @@ public class MyComponentTest {
 //    // given
 //    final int iterations = 100_000;
 //    long memoryFootprintBefore, memoryFootprint = 0;
-//    final MyComponent myComponent = createMyComponent();
+//    final Valuation valuation = createMyComponent();
 //    final double[] results = new double[iterations];
 //
 //
 //    // when
 //    for (int i = 0; i < iterations; i++) {
 //      memoryFootprintBefore = usedMemoryInBytes();
-//      results[i] = myComponent.priceOf(i);
+//      results[i] = valuation.priceOf(i);
 //      memoryFootprint+= usedMemoryInBytes() - memoryFootprintBefore;
 //    }
 //
@@ -84,13 +81,13 @@ public class MyComponentTest {
 //  }
 
   @NotNull
-  private MyComponent createMyComponent() {
-    return new MyComponent(15.5);
+  private Valuation createMyComponent() {
+    return new Valuation(15.5);
   }
 
   @NotNull
-  private MyComponent componentUnderTest() {
-    return new MyComponent(12.3);
+  private Valuation componentUnderTest() {
+    return new Valuation(12.3);
   }
 
   @NotNull
@@ -99,7 +96,7 @@ public class MyComponentTest {
   }
 
   @NotNull
-  private JLBHOptions parametersWhenTesting(MyComponent myComponent) {
+  private JLBHOptions parametersWhenTesting(Valuation valuation) {
     return new JLBHOptions()
             .warmUpIterations(50_000)
             .iterations(50_000)
@@ -107,7 +104,7 @@ public class MyComponentTest {
             .runs(2)
             .recordOSJitter(true)
             .accountForCoordinatedOmmission(true)
-            .jlbhTask(new ComponentTestingTask(myComponent));
+            .jlbhTask(new ComponentTestingTask(valuation));
   }
 
   @NotNull

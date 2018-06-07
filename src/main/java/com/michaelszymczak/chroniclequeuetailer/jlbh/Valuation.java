@@ -5,14 +5,14 @@ import java.util.Arrays;
 /**
  * Created 07/04/18.
  */
-public class MyComponent {
+public class Valuation {
 
   // private final double[] data = new double[1000];
   private final double someInitialState;
 
   private double sum = 0.0d;
 
-  public MyComponent(double someInitialState) {
+  public Valuation(double someInitialState) {
     this.someInitialState = someInitialState;
   }
 
