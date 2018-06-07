@@ -1,4 +1,4 @@
-
+---
 Glossary:
 High quality software - nearly bug-free and maintainable software
 
