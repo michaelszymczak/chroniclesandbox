@@ -75,6 +75,8 @@ public class ValuationTest {
     // then
     final long target = asManyBytesAs(2 * iterations);
 
+    // TODO: Explicitly check that GC didn't happen (it shouldn't as no garbage generated)
+    //       However, this is only a supporting test - the one above is the one that matters
     assertTrue(Arrays.stream(results).allMatch(value -> value >= 0));
     assertThat(memoryFootprint, lessThan(target));
     assertThat(memoryFootprint, is(not(lessThan(0L))));
