@@ -27,58 +27,58 @@ public class ValuationTest {
   public void testNothing() throws Exception {
   }
 
-//  @Test // UNIT TEST
-//  public void shouldBeCorrectWhenCalculatingThePrice() throws Exception {
-//    Valuation valuation = new Valuation(15.5);
-//
-//    double result = valuation.priceOf(1500);
-//
-//    assertEquals(749265.5, result, 0.0001);
-//  }
-//
-//  @Test // NOT A UNIT TEST
-//  public void shouldAlwaysQuicklyPerformTheTask() throws Exception {
-//    // given
-//    final Valuation valuation = createMyComponent();
-//    final JLBHResultConsumer results = results();
-//    final JLBH jlbh = new JLBH(parametersWhenTesting(valuation), printStream(), results);
-//
-//    // when
-//    jlbh.start();
-//
-//    // then
-//
-//    JLBHResult.RunResult latency = results.get().endToEnd().summaryOfLastRun();
-//    assertThat(String.format("Worst end to end latency was %d microseconds", latency.getWorst().toNanos() / 1000),
-//            latency.getWorst(), lessThan(ms(1)));
-//    assertThat(String.format("99.9th percentile latency was %d microseconds", latency.getWorst().toNanos() / 1000),
-//            latency.get999thPercentile(), lessThan(us(50)));
-//  }
-//
-//  @Test // NOT A UNIT TEST
-//  public void shouldNotRequireGC() throws Exception {
-//    // given
-//    final int iterations = 100_000;
-//    long memoryFootprintBefore, memoryFootprint = 0;
-//    final Valuation valuation = createMyComponent();
-//    final double[] results = new double[iterations];
-//
-//
-//    // when
-//    for (int i = 0; i < iterations; i++) {
-//      memoryFootprintBefore = usedMemoryInBytes();
-//      results[i] = valuation.priceOf(i);
-//      memoryFootprint+= usedMemoryInBytes() - memoryFootprintBefore;
-//    }
-//
-//
-//    // then
-//    final long target = asManyBytesAs(2 * iterations);
-//
-//    assertTrue(Arrays.stream(results).allMatch(value -> value >= 0));
-//    assertThat(memoryFootprint, lessThan(target));
-//    assertThat(memoryFootprint, is(not(lessThan(0L))));
-//  }
+  @Test // UNIT TEST
+  public void shouldBeCorrectWhenCalculatingThePrice() throws Exception {
+    Valuation valuation = new Valuation(15.5);
+
+    double result = valuation.priceOf(1500);
+
+    assertEquals(749265.5, result, 0.0001);
+  }
+
+  @Test // NOT A UNIT TEST
+  public void shouldAlwaysQuicklyPerformTheTask() throws Exception {
+    // given
+    final Valuation valuation = createMyComponent();
+    final JLBHResultConsumer results = results();
+    final JLBH jlbh = new JLBH(parametersWhenTesting(valuation), printStream(), results);
+
+    // when
+    jlbh.start();
+
+    // then
+
+    JLBHResult.RunResult latency = results.get().endToEnd().summaryOfLastRun();
+    assertThat(String.format("Worst end to end latency was %d microseconds", latency.getWorst().toNanos() / 1000),
+            latency.getWorst(), lessThan(ms(1)));
+    assertThat(String.format("99.9th percentile latency was %d microseconds", latency.getWorst().toNanos() / 1000),
+            latency.get999thPercentile(), lessThan(us(50)));
+  }
+
+  @Test // NOT A UNIT TEST
+  public void shouldNotRequireGC() throws Exception {
+    // given
+    final int iterations = 100_000;
+    long memoryFootprintBefore, memoryFootprint = 0;
+    final Valuation valuation = createMyComponent();
+    final double[] results = new double[iterations];
+
+
+    // when
+    for (int i = 0; i < iterations; i++) {
+      memoryFootprintBefore = usedMemoryInBytes();
+      results[i] = valuation.priceOf(i);
+      memoryFootprint+= usedMemoryInBytes() - memoryFootprintBefore;
+    }
+
+
+    // then
+    final long target = asManyBytesAs(2 * iterations);
+
+    assertTrue(Arrays.stream(results).allMatch(value -> value >= 0));
+    assertThat(memoryFootprint, lessThan(target));
+    assertThat(memoryFootprint, is(not(lessThan(0L))));
+  }
 
   @NotNull
   private Valuation createMyComponent() {
